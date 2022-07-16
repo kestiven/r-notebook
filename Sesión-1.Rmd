@@ -1,0 +1,192 @@
+Arithmetic with R
+
+```{r}
+5 + 5 -3
+10-2
+3*5
+(5+5)/2
+28%%6
+
+```
+
+Variable assignment
+
+```{r}
+x <- 10
+x
+
+y <- 9
+
+x+y
+result <- x-y
+result
+
+
+```
+
+Basics data types in R
+
+```{r}
+
+my_numeric <- 423.80
+my_character <- "universe"
+my_logical <- FALSE  
+
+class(my_numeric)
+class(my_character)
+class(my_logical)
+
+```
+
+
+Crate a vector
+
+```{r}
+
+numeric_vector <- c(1,10,49)
+numeric_vector
+
+character_vector <- c("a","b","c")
+
+boolean_vector <- c(TRUE,FALSE,TRUE)
+
+character_vector
+boolean_vector
+
+
+poker_vector <- c(140,-50,-20,-120,240)
+roulette_vector <- c(-24,-50,10,350,10)
+
+poker_vector
+
+```
+
+Naming a vector
+
+```{r}
+
+names(poker_vector) <- c("Monday","Tuesday","Wednesday","Thursday","Friday")
+poker_vector
+
+names(roulette_vector) <- c("Monday","Tuesday","Wednesday","Thursday","Friday")
+roulette_vector
+
+days <- c("Monday","Tuesday","Wednesday","Thursday","Friday")
+
+names(poker_vector) <- days
+poker_vector
+
+```
+
+Selection by comparison
+
+```{r}
+age <- 21
+age >= 18
+
+selection_vector <- poker_vector > 0
+selection_vector
+
+poker_winning_days <- poker_vector[selection_vector]
+poker_winning_days
+
+```
+Calculating
+
+```{r}
+x_vector <- c(4,7,9)
+y_vector <- c(12,45,78)
+
+result_vector <- y_vector + x_vector
+result_vector
+```
+2022-07-16
+Vector selection
+```{r}
+poker_vector[3] # position
+poker_vector[c(2,3,4)] # segment or collection
+poker_vector[2:4] # range
+```
+Matrices
+```{r}
+matrix(1:9, byrow = TRUE, nrow = 3)
+```
+analyze matrices
+
+```{r}
+# Incoming by moving, local and foreign
+
+new_hope <- c(460.998, 314.4)
+empire_strikes <- c(290.475, 247.900)
+return_jedi <- c(309.306, 165.8)
+
+box_office <- c(new_hope, empire_strikes, return_jedi)
+box_office
+
+stars_wars_matrix <- matrix(box_office, byrow = TRUE, nrow = 3)
+stars_wars_matrix
+```
+```{r}
+region <- c("US", "NON-US")
+titles <- c("A new hope", "The empire stirkes back", "Return of the Jedi")
+
+colnames(stars_wars_matrix) <- region
+rownames(stars_wars_matrix) <- titles
+
+stars_wars_matrix
+```
+```{r}
+rowSums(stars_wars_matrix)
+```
+Selection with Matrix
+```{r}
+stars_wars_matrix[1,2]
+stars_wars_matrix[1:2,1:2]
+```
+
+Arithmetic with matrix
+```{r}
+mean <- stars_wars_matrix/5
+mean * 2
+```
+FACTORES
+```{r}
+sex_vector <- c("Male","Female","Female","Male","Male")
+factor_sex_vector <- factor(sex_vector) # Nominal
+factor_sex_vector
+```
+```{r}
+temperature_vector <- c("high", "low", "high", "low", "medium")
+factor_temperature_vector <- factor(temperature_vector, order = TRUE, levels = c("low","medium","high")) # Ordinal
+factor_temperature_vector
+```
+Factor levels
+```{r}
+survey_vector = c("M", "F", "F", "M", "M")
+factor_survey_vector <- factor(survey_vector)
+factor_survey_vector
+levels(factor_survey_vector) <- c("Female", "Male") # Change tags for levels
+```
+Summary
+```{r}
+summary(factor_survey_vector)
+```
+Ordered factor
+```{r}
+# Only applied to ordinal values
+male = factor_survey_vector[1] # First value
+female = factor_survey_vector[2] # Second value
+
+male > female # It gives error because the values does not have order
+
+speed_vector <- c("medium", "slow", "slow", "medium", "fast")
+factor_speed_vector <- factor(speed_vector, ordered = TRUE, levels = c("slow", "medium", "fast"))
+factor_speed_vector
+
+speed_1 <- factor_speed_vector[1]
+speed_5 <- factor_speed_vector[5]
+
+speed_1 > speed_5
+speed_1 < speed_5
+```
+
