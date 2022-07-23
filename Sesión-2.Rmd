@@ -13,9 +13,65 @@ diameter <- c(0.382, 0.949, 1, 0.532, 11.209, 9.449, 4.007, 3.883)
 rotation <- c(58.64, -243.02, 1, 1.03, 0.41, 0.43, -0.72, 0.67)
 rings <- c(FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE)
 
-planets_df = data.frame(name, type, diameter, rotation, rings)
-View(planets_df)
+planets_df <- data.frame(name, type, diameter, rotation, rings)
+planets_df
+```
+Selection of data frame elements
+```{r}
+planets_df[1,3] # cell
+planets_df[4,] # row four
+planets_df[2:5, 'diameter']
+
+rings_vector <- planets_df$rings # Vector rings
+planets_df[rings_vector,] # filter where rings are true
+planets_df[!rings_vector,] # filter where rings are false
+
+subset(planets_df, subset=diameter<1) # filter for parameter condition  using function
 
 ```
+Sorting
+```{r}
+a <- c(100, 10, 1000)
+order(a) # It returns the index who represents elements
+a[order(a)] # it return the elements ordered
+
+positions <- order(planets_df$diameter)
+positions
+
+planets_df[positions,]
+```
+Lists
+They have a different structured objects.
+```{r}
+my_vector <- 1:10
+my_matrix <- matrix(1:9, ncol=3)
+my_df = mtcars[1:10,]
+
+my_list <- list(my_vector, my_matrix, my_df)
+my_list
+
+names(my_list) <- c("vec", "mat", "df") # it changes names for index
+my_list
+```
+Data for lists
+```{r}
+mov <- c("The Shining")
+act <- matrix(c("Jack Nicholson","Shelley Duvall","Danny Lloyd","Scatman Crothers","Barry Nelson"))
+
+scores <- c(4.5,5,4)
+sources <- c("IMDb1","IMDb2","IMDb3")
+comments <- c("Best Horror Film I Have Ever Seen","A truly brilliant and scary film from Stanley Kubrick","A masterpiece of psychological horror")
+rev <- data.frame(scores, sources, comments)
+
+shining_list <- list(moviename=mov, actors=act, reviews=rev)
+shining_list
+
+```
+Selecting (List)
+```{r}
+shining_list[[2]] # all actors
+shining_list[[2]][1] # first actor
+```
+
 
 
