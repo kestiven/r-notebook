@@ -1,0 +1,162 @@
+# Funciones con R
+
+Una función permite realizar una tarea definida; puede o no devolver valores. Se usa para definir nuestra propia lógica que nos ayuda a resolver un problema particular o recurrente.
+
+## Estructura de una función
+
+Para crear una función se utiliza la palabra reservada `function`.
+
+``` r
+nombre_funcion <- function(arg1, arg2, ... ) {
+  # Código
+  # return ()
+}
+```
+
+## Ejemplo de función
+
+```{r}
+saludo <- function() {
+  print("Hola R")
+}
+
+saludo()
+```
+
+## Argumentos de una función
+
+Los **argumentos** son los parámetros que recibe una función, los cuales nos permite enviar datos para que la función los use dentro de su código.
+
+```{r}
+saludo <- function(nombre){
+  print(paste("Hola",nombre))
+}
+
+saludo("R")
+```
+
+## Argumentos con valor
+
+Los argumentos con valor, permiten definir un valor por defecto al parámetro. Si se usa la función y no se envía un valor, la función utilizara el valor previamente definido.
+
+```{r}
+saludo <- function(nombre="R"){
+  print(paste("Hola",nombre))
+}
+
+saludo()
+saludo("Python")
+
+```
+
+# Familia apply
+
+Esta familia de funciones permite aplicar funciones sobre las estructuras de datos de R, sin la necesidad de usar ciclos sobre los mismos. Ya que estas funciones están optimizadas para este trabajo.
+
+Sin embargo, también dependerá del resultado deseado.
+
+## lappy
+
+Aplica una función a una lista o un vector, devolviendo una lista de la misma longitud que la entrada.
+
+### Sintaxis
+
+``` r
+lapply(X,   # List or vector
+       FUN, # Function to be applied
+       ...) # Additional arguments to be passed to FUN
+```
+
+### Ejemplos
+
+#### Aplicado a una lista
+
+Suma todos los elementos de los objetos de la lista.
+
+```{r}
+a <- list(A = c(8, 9, 7, 5),
+          B = data.frame(x = 1:5, y = c(5, 1, 0, 2, 3)))
+lapply(a, sum)
+```
+
+#### Aplicado a un vector
+
+Calcula la raíz cuadrada de cada elemento
+
+```{r}
+b <- c(16, 9, 4)
+
+lapply(b, sqrt)
+```
+
+## sapply
+
+Aplica una función a un vector o lista y devolviendo un vector, una matriz o un arreglo.
+
+### Sintaxis
+
+``` r
+
+sapply(X, # Vector, list or expression object
+       FUN, # Function to be applied
+       ..., # Additional arguments to be passed to FUN
+       simplify = TRUE, # If FALSE returns a list. If "array" returns an array if possible
+       USE.NAMES = TRUE) # If TRUE and if X is a character vector, uses the names of X
+```
+
+### Ejemplos
+
+#### Iterar sobre un vector
+
+Calculando el cuadrado de cada elemento.
+
+```{r}
+
+sapply(1:10, function(i) i ^ 2)
+```
+
+#### Iterar sobre una lista
+
+Calculando la longitud de los elementos de los objetos de la lista.
+
+```{r}
+List <- list(A = 1:5, B = 6:20, C = 1)
+
+sapply(List, length)
+```
+
+## vapply
+
+Aplica una función sabiendo el tipo de dato al cual se aplicará y ayuda a prevenir errores silenciosos.
+
+### Sintaxis
+
+``` r
+lapply(X, # List or vector
+       FUN, # Function to be applied
+       ...) # Additional arguments to be passed to FUN
+```
+
+### Ejemplos
+
+#### Calculando el valor máximo de los elementos de la lista.
+
+```{r}
+List = list(a = c(1, 3, 5), b = c(2, 4, 6), c = c(9, 8, 7))
+
+sapply(List, max)
+
+List$d <- c("a", "b", "c")
+
+sapply(List, max)
+```
+
+Usando sapply devuelve cadenas, cuando se espera un valor numérico.
+
+#### Usando vapply para reconocer el tipo de dato
+
+```{r}
+# Aplicando vappy
+
+vapply(List, max, numeric(1))
+```
