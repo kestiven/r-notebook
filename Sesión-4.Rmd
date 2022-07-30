@@ -1,0 +1,188 @@
+# Functions
+
+```{r}
+length((linkedin))
+head(linkedin, 2)
+tail(linkedin, 2)
+
+help("length")
+?length
+matrix()
+list()
+```
+
+## Use a function
+
+```{r}
+avg_li <- mean(linkedin)
+avg_li
+sum(linkedin)
+abs(linkedin)
+```
+
+## Write your own function
+
+```{r}
+pow_two <- function(arg){
+  arg^2
+}
+
+pow_two(2)
+
+sum_abs <- function(arg1, arg2){
+  abs(arg1) + abs(arg2)
+}
+
+sum_abs(-2, 3)
+
+hello <- function(){
+  print("Hi there")
+  return (TRUE)
+}
+
+hello()
+
+pow_two <- function(x, print_info=TRUE){
+  y <- x**2
+  if (print_info) {
+    print(paste(x, "to the power two equals", y))
+  }
+  return(y)
+}
+
+pow_two(3)
+pow_two(2, FALSE)
+
+interpret = function(num_views){
+  if(num_views > 15){
+    print("You're popular!")
+    return(num_views)
+  } else {
+    print("Try to be more visible")
+    return(0)
+  }
+}
+
+interpret(linkedin[2])
+
+interpret_all <- function(views, return_sum=TRUE){
+  count <- 0
+  for(v in views) {
+    count <- count + interpret(v)
+  }
+  
+  if (return_sum){
+    return(count)
+  } else {
+    return(NULL)
+  }
+}
+
+interpret_all(linkedin)
+```
+
+# Install package
+
+Tools -\> Install Package
+
+O usando la consola con `ìnstall.packages(nombre)`
+
+```{r}
+library(ggplot2)
+
+mtcars
+
+qplot(mtcars$wt, mtcars$hp)
+```
+
+# The apply family functions
+
+## lapply
+
+Devuelve formato de lista
+
+```{r}
+pioneers = c("GAUSS:177", "BAYES:1702", "PASCAL:1623", "PEARSON:1857")
+
+split_math <- strsplit(pioneers, split=":") # Crea vector
+
+split_low <- lapply(split_math, tolower) # Aplica a cada elemento
+
+select_first <- function(x) {
+  x[1]
+}
+
+names <- lapply(split_math, select_first)
+
+select_second <- function(x) {
+  x[2]
+}
+
+years <- lapply(split_math, select_second)
+```
+
+## Lapply and annonymous function
+
+```{r}
+split_low
+names <- lapply(split_low, function(x){x[1]})
+years <- lapply(split_low, function(x){x[2]})
+```
+
+## Use lapply with additional arguments
+
+```{r}
+select_el <- function(x, index){
+  x[index]
+}
+
+select_el(split_low, 1)
+
+nomes <- lapply(split_low, select_el, index = 1) # El primer parametro de la función select_el, es enviado automaticamente.
+years <- lapply(split_low, select_el, index = 2)
+```
+
+## Sapply
+
+Devuelve formato de vector
+
+```{r}
+names = sapply(split_low, select_el, 1) # Devuelve un vector
+
+extreme_avg <- function(x){
+  (min(x) + max(x))/2
+}
+
+vec1 <- c(3,8,7,6)
+vec2 <- c(8,8,7,2)
+vec3 <- c(10,1,11,6)
+
+temp <- list(vec1, vec2, vec3)
+
+sapply(temp, extreme_avg) # vector
+lapply(temp, extreme_avg) # lista
+```
+
+## Vapply
+
+Se valida el tipo de respuesta devuelto.
+
+```{r}
+basics <- function(x){
+  c(min = min(x), mean = mean(x), max = max(x))
+}
+
+basics(temp[[1]])
+basics(temp[[2]])
+basics(temp[[3]])
+
+vapply(temp, basics, numeric(3)) # Debe devolver tres resultados numericos
+```
+
+# Mathematical utilities
+
+```{r}
+errors <- c(1.9,-2.6,4.0,-9.5,-3.4,7.3)
+
+print(sum(abs(round(errors))))
+```
