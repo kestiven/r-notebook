@@ -45,11 +45,11 @@ filter(candidate == "Donald Trump" | candidate == "Hillary Clinton")
 # filter(candidate == c("Donald Trump", "Hillary Clinton"))
 ```
 
-## 2.2 Filtrar votos para el partido Demócrata y el candidato Shelby
+## 2.2 Filtrar votos para el partido Demócrata y el condado Shelby
 
 ```{r}
 dataset_results %>%
-  filter(party == "Democrat" & candidate == "Hillary Clinton")
+  filter(party == "Democrat" & county == "Shelby")
 ```
 
 ## 2.3 Filtar voto para el estado de Alabama y que la cantidad de votos sea mayor a 15000
@@ -61,11 +61,11 @@ dataset_results %>%
 
 # 3 Utilice la función *select* y *arrange* para el siguiente filtrado:
 
-## 3.1 Filtrar votos para el estado de Texas y el candidato Denton, seleccionando únicamente las columnas *party*, *candidate*, *votes*, luego ordene de forma descendente por la columna *votes*.
+## 3.1 Filtrar votos para el estado de Texas y el condado Denton, seleccionando únicamente las columnas *party*, *candidate*, *votes*, luego ordene de forma descendente por la columna *votes*.
 
 ```{r}
 dataset_results %>%
-  filter(state == "Texas" & candidate == "Donald Trump") %>%
+  filter(state == "Texas" & county == "Denton") %>%
   select(party, candidate, votes) %>%
   arrange(desc(votes))
 ```
